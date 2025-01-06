@@ -1,0 +1,31 @@
+import numpy as np
+
+def create_one_hot_encodings(corpus):
+    vocab = {}
+    index = 0
+    for sen in corpus:
+        words = sen.lower().split()
+        for word in words:
+            if word not in vocab:
+                vocab[word] = index
+                index += 1
+
+    V = len(vocab)
+    one_hot_encodings = {}
+
+    for word,idx in vocab.items():
+        one_hot_vector = np.zeros(V)
+        one_hot_vector[idx] = 1
+        one_hot_encodings[word] = one_hot_vector
+
+    return vocab, one_hot_encodings
+corpus = [ "I love machine learning",
+    "Machine learning is amazing",
+    "I love learning new things"] 
+
+vocab, one_hot_encodings = create_one_hot_encodings(corpus)
+
+print("Vocabulary:",vocab)
+print("One hot Encoding",one_hot_encodings)
+for word, one_hot_vector in one_hot_encodings.items():
+    print(f"Word {word} , One hot vector {one_hot_vector}")
