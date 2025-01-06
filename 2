@@ -1,0 +1,15 @@
+def gen_ngrams(sen,n):
+    words = sen.lower().split()
+    ngrams = []
+
+    for i in range(len(words)-n+1):
+        ngram = tuple(words[i:i+n])
+        ngrams.append(ngram)
+    return ngrams
+
+sen = "the quick brown fox ran over the Black dog."
+n= 4
+ngrams = gen_ngrams(sen,n)
+print(f"{n}-grams")
+for gram in ngrams:
+    print(gram)
