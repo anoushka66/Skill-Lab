@@ -1,0 +1,28 @@
+def compute_3_lang_model(docs):
+    from collections import defaultdict
+
+    trigram_counts = defaultdict(int)
+    total_trigram = 0
+
+    for doc in docs:
+        words = doc.lower().split()
+        for i in range(len(words)-2):
+            trigram = tuple(words[i:i+3])
+            trigram_counts[trigram] += 1
+            total_trigram +=1
+
+    trigram_probab = {}
+    for trigram, count in trigram_counts.items():
+        trigram_probab[trigram] = count/ total_trigram
+
+    return trigram_probab
+
+docs = [
+   "The quick brown fox jumps over the lazy dog",
+    "The quick blue fox jumps over the lazy cat",
+    "The lazy dog sleeps under the blue sky"
+]
+trigma_model = compute_3_lang_model(docs)
+print("Trigram Probability")
+for trigram, prob in trigma_model.items():
+    print(f"{trigram}:{prob}")
